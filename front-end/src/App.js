@@ -26,40 +26,40 @@ function App() {
     color: "white",
   };
   //Array of each query maintained in state
-  const [query1, setQuery1] = useState([]);
-  const [query2, setQuery2] = useState([]);
-  const [query3, setQuery3] = useState([]);
-  const [query4, setQuery4] = useState([]);
-  const [query5, setQuery5] = useState([]);
+  // const [query1, setQuery1] = useState([]);
+  // const [query2, setQuery2] = useState([]);
+  // const [query3, setQuery3] = useState([]);
+  // const [query4, setQuery4] = useState([]);
+  // const [query5, setQuery5] = useState([]);
   const [Userdata, setUserData] = useState([]);
-  const [curQuery, setCurQuery] = useState(null);
+  const [curQuery, setCurQuery] = useState(0);
   const [msg, setmsg] = useState("Press the buttons to get desired data.");
 
   //Data for mapping to increase code readability
   const arr = [
     {
       val: 1,
-      name: query1,
+      // name: query1,
       msg: " Users which have income lower than $5 USD and have a car of brand “BMW” or “Mercedes”.",
     },
     {
       val: 2,
-      name: query2,
+      // name: query2,
       msg: "Male Users which have phone price greater than 10,000.",
     },
     {
       val: 3,
-      name: query3,
+      // name: query3,
       msg: "Users whose last name starts with “M” and has a quote character length greater than 15 and email includes his/her last name.",
     },
     {
       val: 4,
-      name: query4,
+      // name: query4,
       msg: "Users which have a car of brand “BMW”, “Mercedes” or “Audi” and whose email does not include any digit.",
     },
     {
       val: 5,
-      name: query5,
+      // name: query5,
       msg: "Data of top 10 cities which have the highest number of users and their average income.",
     },
   ];
@@ -69,7 +69,7 @@ function App() {
     if (curQuery === 1) {
       axios
         .get(`${url}/bmwMercedes`)
-        .then((response) => setQuery1(response.data))
+        .then((response) => setUserData(response.data))
         .catch((error) => console.error(error));
     }
   }, [curQuery]);
@@ -78,7 +78,7 @@ function App() {
     if (curQuery === 2) {
       axios
         .get(`${url}/phonePrice`)
-        .then((response) => setQuery2(response.data))
+        .then((response) => setUserData(response.data))
         .catch((error) => console.error(error));
     }
   }, [curQuery]);
@@ -86,7 +86,7 @@ function App() {
     if (curQuery === 3) {
       axios
         .get(`${url}/lastName`)
-        .then((response) => setQuery3(response.data))
+        .then((response) => setUserData(response.data))
         .catch((error) => console.error(error));
     }
   }, [curQuery]);
@@ -94,7 +94,7 @@ function App() {
     if (curQuery === 4) {
       axios
         .get(`${url}/carAndEmail`)
-        .then((response) => setQuery4(response.data))
+        .then((response) => setUserData(response.data))
         .catch((error) => console.error(error));
     }
   }, [curQuery]);
@@ -102,7 +102,7 @@ function App() {
     if (curQuery === 5) {
       axios
         .get(`${url}/top10Cities`)
-        .then((response) => setQuery5(response.data))
+        .then((response) => setUserData(response.data))
         .catch((error) => console.error(error));
     }
   }, [curQuery]);
@@ -116,7 +116,6 @@ function App() {
               style={{ backgroundColor: "black", color: "white" }}
               variant='outlined'
               onClick={() => {
-                setUserData(item.name);
                 setmsg(item.msg);
                 setCurQuery(item.val);
               }}
