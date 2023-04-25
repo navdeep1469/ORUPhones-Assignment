@@ -1,11 +1,5 @@
 const User = require("../model/User");
-
-// exports.name = async (req, res) => {
-//   console.log("Hello");
-//   const user = await User.findById("64456285bb36f14b2a35b3d9");
-//   res.json(user);
-// };
-
+//Controller to controle and do mongoDB querry each API request from the frontend
 exports.getBmwMercedes = async (req, res) => {
   try {
     // console.log("Hello");

@@ -9,6 +9,7 @@ const {
   getTop10Cities,
 } = require("../controllers/User");
 
+//All the routes
 router.get("/users/bmwMercedes", getBmwMercedes);
 router.get("/users/phonePrice", getPhonePrice);
 router.get("/users/lastName", getLastName);
