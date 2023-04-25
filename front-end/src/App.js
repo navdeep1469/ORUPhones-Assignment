@@ -1,3 +1,7 @@
+/**All the desired imports
+ * Axios for API calls
+ * Table from MUI
+ */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -12,6 +16,7 @@ import "./App.css";
 import { TableCell } from "@mui/material";
 
 function App() {
+  //Deployed backend url
   const url = "https://oruphones-backend-deploy-bsh6.onrender.com/users";
   const cellStyle = {
     fontWeight: "bold",
@@ -20,14 +25,17 @@ function App() {
   const rowStyle = {
     color: "white",
   };
+  //Array of each query maintained in state
   const [query1, setQuery1] = useState([]);
   const [query2, setQuery2] = useState([]);
   const [query3, setQuery3] = useState([]);
   const [query4, setQuery4] = useState([]);
   const [query5, setQuery5] = useState([]);
-  const [Userdata, setUserData] = useState(query1);
+  const [Userdata, setUserData] = useState([]);
+  const [curQuery, setCurQuery] = useState(null);
   const [msg, setmsg] = useState("Press the buttons to get desired data.");
 
+  //Data for mapping to increase code readability
   const arr = [
     {
       val: 1,
@@ -56,32 +64,49 @@ function App() {
     },
   ];
 
+  //Useeffect hook for each API calls so that data only get fetched when the desired button is pressed
   useEffect(() => {
-    axios
-      .get(`${url}/bmwMercedes`)
-      .then((response) => setQuery1(response.data))
-      .catch((error) => console.error(error));
+    if (curQuery === 1) {
+      axios
+        .get(`${url}/bmwMercedes`)
+        .then((response) => setQuery1(response.data))
+        .catch((error) => console.error(error));
+    }
+  }, [curQuery]);
 
-    axios
-      .get(`${url}/phonePrice`)
-      .then((response) => setQuery2(response.data))
-      .catch((error) => console.error(error));
+  useEffect(() => {
+    if (curQuery === 2) {
+      axios
+        .get(`${url}/phonePrice`)
+        .then((response) => setQuery2(response.data))
+        .catch((error) => console.error(error));
+    }
+  }, [curQuery]);
+  useEffect(() => {
+    if (curQuery === 3) {
+      axios
+        .get(`${url}/lastName`)
+        .then((response) => setQuery3(response.data))
+        .catch((error) => console.error(error));
+    }
+  }, [curQuery]);
+  useEffect(() => {
+    if (curQuery === 4) {
+      axios
+        .get(`${url}/carAndEmail`)
+        .then((response) => setQuery4(response.data))
+        .catch((error) => console.error(error));
+    }
+  }, [curQuery]);
+  useEffect(() => {
+    if (curQuery === 5) {
+      axios
+        .get(`${url}/top10Cities`)
+        .then((response) => setQuery5(response.data))
+        .catch((error) => console.error(error));
+    }
+  }, [curQuery]);
 
-    axios
-      .get(`${url}/lastName`)
-      .then((response) => setQuery3(response.data))
-      .catch((error) => console.error(error));
-
-    axios
-      .get(`${url}/carAndEmail`)
-      .then((response) => setQuery4(response.data))
-      .catch((error) => console.error(error));
-
-    axios
-      .get(`${url}/top10Cities`)
-      .then((response) => setQuery5(response.data))
-      .catch((error) => console.error(error));
-  }, []);
   return (
     <div className='App'>
       <div className='btns'>
@@ -93,6 +118,7 @@ function App() {
               onClick={() => {
                 setUserData(item.name);
                 setmsg(item.msg);
+                setCurQuery(item.val);
               }}
               key={item.val}
             >
