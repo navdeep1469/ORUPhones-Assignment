@@ -36,3 +36,4 @@ When you click the "Query Database" button on the frontend, the backend server w
 ## Contributing
 If you find any issues with the application, feel free to open a new issue or submit a pull request.
 
+![Image](/screenshots/Screenshot 2023-04-25 175057.png)
